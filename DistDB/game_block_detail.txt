@@ -1,0 +1,7 @@
+<div class="thumbnail">
+    <img src='' alt=''>
+        <div class="caption">
+            <h4>
+            </h4>
+        </div>
+</div>

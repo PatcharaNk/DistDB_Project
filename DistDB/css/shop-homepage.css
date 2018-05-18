@@ -1,0 +1,120 @@
+/*!
+ * Start Bootstrap - Shop Homepage (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.slide-image {
+    width: 100%;
+    display: block;
+    margin: auto;
+}
+h3 {
+    color: crimson;
+    text-align: center;
+}
+h4 {
+    color: black;
+    text-align: center;
+}
+h4 span {
+    color: darkblue;
+    text-align: center;
+    font-size: 15px;
+}
+h5 {
+    color:dimgray;
+    margin-left: 25px;
+    
+}
+.carousel-holder {
+    margin-bottom: 30px; 
+}
+#carousel-example-generic {
+    width: auto;
+    height: auto;
+    overflow: hidden;
+}
+#carousel-example-generic img {
+    width: auto;
+    height: 500px;
+    overflow: hidden;
+}
+textarea {
+    resize: vertical;
+}
+textarea {
+    width: auto;
+    height: auto;
+}
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+.caption {
+    height: 130px;
+    overflow:hidden;
+}
+
+.caption h4 {
+    white-space: pre-line;
+}
+
+.thumbnail img {
+    height: 250px;
+    width: 200px;
+    overflow: hidden;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+footer {
+    margin: 50px 0;
+}
+.navbar-toggle2 {
+  position: relative;
+  float: left;
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-right: 15px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.navbar-toggle2:focus {
+  outline: 0;
+}
+.navbar-toggle2 .icon-bar2 {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+}
+.navbar-toggle2 .icon-bar2 + .icon-bar2 {
+  margin-top: 4px;
+}
+@media (min-width: 768px) {
+  .navbar-toggle2 {
+    display: none;
+  }
+}

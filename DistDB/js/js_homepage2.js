@@ -1,0 +1,129 @@
+var href = document.location.href;
+var link = href.split('?');
+var genre = link[1];
+var genre = decodeURI(genre);
+
+var txt = readTextFile('game_block_detail.txt');
+function readTextFile(file){   
+    var allText="";
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                allText = rawFile.responseText;
+            }
+        }
+    }
+    rawFile.send(null);
+    return allText;
+}
+
+if (genre == 'MostRating' || genre == 'MostSelling' ){
+    search("",genre);
+} else {
+    search(genre,'');
+}
+    
+
+function search(genre,type){
+    filter = genre;
+    if (filter.length == 0) { 
+         var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var alltxt = this.responseText;
+                var DT_f_PHP = JSON.parse(alltxt);
+                if (type=='MostRating'){
+//                    alert(type);
+                    DT_f_PHP=mergeSort(DT_f_PHP,'User_Score');
+                }else if (type=='MostSelling'){
+                    DT_f_PHP=mergeSort(DT_f_PHP,'Global_Sales');
+                }
+                insertValue(DT_f_PHP,DT_f_PHP.length);
+            }
+        };
+        xmlhttp.open("GET", "Find2.php?q=", true);
+        xmlhttp.send();
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var alltxt = this.responseText;
+                var DT_f_PHP = JSON.parse(alltxt);
+                DT_f_PHP=mergeSort(DT_f_PHP,'User_Score');
+                insertValue(DT_f_PHP,DT_f_PHP.length);
+            }
+        };
+        xmlhttp.open("GET", "Find2.php?q="+filter, true);
+        xmlhttp.send();
+    }  
+}
+
+function insertValue(DT_f_PHP,len) {
+    var game_panel = document.getElementById('game-panel');
+    for(i = len; i => 1; i--){
+        insertGameblock(i.toString(),DT_f_PHP[i-1]);
+    }
+}
+
+function insertGameblock(id,game_data){
+    var l = game_data.Name+"+"+game_data.Platform;
+    var game_panel = document.getElementById('game-panel');
+    var before = game_panel.innerHTML;
+    game_panel.innerHTML="";
+    var e_block = document.createElement('div');
+    e_block.setAttribute("class","col-sm-3 col-lg-3 col-md-3");
+    e_block.setAttribute("id","game"+id);
+    game_panel.appendChild(e_block);
+    e_block.innerHTML=txt;
+    var img = e_block.getElementsByTagName('img');
+    img[0].setAttribute("id","pic"+id);
+    img[0].src = game_data.URL_Pic;
+    img[0].setAttribute('href','gamepage.html?'+l);
+    var name = e_block.getElementsByTagName('h4')[0];
+    var name_link = document.createElement('a');
+    name_link.setAttribute('id','link'+id);
+    
+    name_link.setAttribute('href','gamepage.html?'+l);
+    name_link.innerHTML = game_data.Name;
+    name.appendChild(name_link);
+    game_panel.innerHTML = before+game_panel.innerHTML;
+    
+}
+
+
+function mergeSort(arr,type){
+    if (arr.length < 2)
+        return arr;
+ 
+    var middle = parseInt(arr.length / 2);
+    var left   = arr.slice(0, middle);
+    var right  = arr.slice(middle, arr.length);
+ 
+    return merge(mergeSort(left,type), mergeSort(right,type),type);
+}
+ 
+function merge(left, right, type)
+{
+    var result = [];
+ 
+    while (left.length && right.length) {
+        if (left[0][type] <= right[0][type]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+ 
+    while (left.length)
+        result.push(left.shift());
+ 
+    while (right.length)
+        result.push(right.shift());
+ 
+    return result;
+}
